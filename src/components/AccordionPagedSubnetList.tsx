@@ -1,4 +1,4 @@
-import { useState, useMemo, useCallback } from 'react';
+import { useState } from 'react';
 import { IPv4Address } from '../lib/IPv4Address';
 import { ColoredIP } from './ColoredIP';
 
@@ -7,26 +7,7 @@ export function AccordionPagedSubnetList({ cidr, subnetCount, ip, pageSize }: { 
   const [isOpen, setIsOpen] = useState(false);
   const totalPages = Math.ceil(subnetCount / pageSize);
 
-  const generateSubnets = useCallback(() => {
-    const subnets: IPv4Address[] = [];
-    const baseAddr = ip.networkAddress.addr;
-    const subnetSize = 2 ** (32 - Number(cidr));
-
-    for (let i = 0; i < subnetCount; i++) {
-      const subnetAddr = baseAddr + (i * subnetSize);
-      subnets.push(new IPv4Address(subnetAddr, Number(cidr)));
-    }
-
-    return subnets;
-  }, [ip, cidr, subnetCount]);
-
-  const currentSubnets = useMemo(() => {
-    if (!isOpen) return [];
-    const subnets = generateSubnets();
-    const startIndex = page * pageSize;
-    const endIndex = startIndex + pageSize;
-    return subnets.slice(startIndex, endIndex);
-  }, [isOpen, page, pageSize, generateSubnets]);
+  const currentSubnets = isOpen ? ip.getSubnetPage(Number(cidr), page, pageSize) : [];
 
   const handleNextPage = () => {
     if (page < totalPages - 1) setPage(page + 1);

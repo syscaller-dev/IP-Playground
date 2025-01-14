@@ -1,4 +1,3 @@
-import { useState, useMemo, useCallback } from 'react';
 import { IPv4Address } from '../lib/IPv4Address';
 import { Network } from 'lucide-react';
 import { AccordionPagedSubnetList } from './AccordionPagedSubnetList';
@@ -7,13 +6,10 @@ export function SubnetList({ ip }: { ip: IPv4Address }) {
   const maxCidr = 32; // Show all possible CIDRs
   const pageSize = 8; // Display a maximum of 8 subnets per CIDR
 
-  const subnetsByCidr = useMemo(() => {
-    const subnets: { [cidr: number]: number } = {};
-    for (let cidr = ip.cidr + 1; cidr <= maxCidr; cidr++) {
-      subnets[cidr] = 2 ** (cidr - ip.cidr);
-    }
-    return subnets;
-  }, [ip]);
+  const subnetsByCidr: { [cidr: number]: number } = {};
+  for (let cidr = ip.cidr + 1; cidr <= maxCidr; cidr++) {
+    subnetsByCidr[cidr] = 2 ** (cidr - ip.cidr);
+  }
 
   if (Object.keys(subnetsByCidr).length === 0) return null;
 

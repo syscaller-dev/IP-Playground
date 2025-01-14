@@ -54,6 +54,21 @@ export class IPv4Address {
         }
     }
 
+    getSubnetPage(targetCIDR: number, page: number = 0, pageSize: number = 8): IPv4Address[] {
+        const subnetSize = 2 ** (32 - targetCIDR);
+        const baseAddr = this._addr & IPv4Address.cidrToMask(this._cidr);
+        const maxSubnets = 2 ** (targetCIDR - this._cidr);
+        const startIndex = page * pageSize;
+        const subnets: IPv4Address[] = [];
+
+        for (let index = startIndex; index < startIndex + pageSize && index < maxSubnets; index++) {
+            const addr = baseAddr + index * subnetSize;
+            subnets.push(new IPv4Address(addr, targetCIDR));
+        }
+
+        return subnets;
+    }
+
     get addr(): number {
         return this._addr;
     }
@@ -185,6 +200,8 @@ export class IPv4Address {
 
         return new IPv4Address(addrNumber, CIDR);
     }
+
+    
 
     static privateClassANet = IPv4Address.fromString('10.0.0.0/8');
     static privateClassBNet = IPv4Address.fromString('172.16.0.0/12');
