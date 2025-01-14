@@ -1,0 +1,51 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+}
+
+.net-color {
+  @apply text-orange-500;
+}
+
+.subnet-color {
+  @apply text-green-500;
+}
+
+.host-color {
+  @apply text-blue-500;
+}
+
+.net-host-gradient {
+  @apply bg-gradient-to-r from-orange-500 to-blue-500 bg-clip-text text-transparent;
+}
+
+.net-subnet-gradient {
+  @apply bg-gradient-to-r from-orange-500 to-green-500 bg-clip-text text-transparent;
+}
+
+.subnet-host-gradient {
+  @apply bg-gradient-to-r from-green-500 to-blue-500 bg-clip-text text-transparent;
+}
+
+.net-subnet-host-gradient {
+  @apply bg-gradient-to-r from-orange-500 via-green-500 to-blue-500 bg-clip-text text-transparent;
+}
+
+.net-slider {
+  @apply absolute -left-[1ch] w-[36ch] top-2 h-4 opacity-0 cursor-ew-resize;
+}
