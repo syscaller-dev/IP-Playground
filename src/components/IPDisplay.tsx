@@ -54,7 +54,7 @@ export function IPDisplay({ ip, onIPChange }: IPDisplayProps) {
                   <dd>
                     <a
                       className="cursor-pointer hover:opacity-80"
-                      href={`/?ip=${ip.networkAddress.toString()}`}
+                      href={`?ip=${ip.networkAddress.toString()}`}
                     >
                       <ColoredIP ip={ip.networkAddress} />
                     </a>
@@ -69,7 +69,7 @@ export function IPDisplay({ ip, onIPChange }: IPDisplayProps) {
                   <dd>
                     <a
                       className="cursor-pointer hover:opacity-80"
-                      href={`/?ip=${ip.broadcastAddress.toString()}`}
+                      href={`?ip=${ip.broadcastAddress.toString()}`}
                     >
                       <ColoredIP ip={ip.broadcastAddress} />
                     </a>

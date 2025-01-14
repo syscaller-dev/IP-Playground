@@ -45,7 +45,7 @@ export function AccordionPagedSubnetList({ cidr, subnetCount, ip, pageSize }: { 
         <div>
           <div className="grid gap-2 md:grid-cols-2 lg:grid-cols-3">
             {currentSubnets.map((subnet, i) => (
-              <a href={`/?ip=${subnet.toString()}`} target='_blank' rel='noreferrer' key={i}>
+              <a href={`?ip=${subnet.toString()}`} target='_blank' rel='noreferrer' key={i}>
                 <div
                   key={i}
                   className="bg-gray-800 p-3 rounded border border-gray-700 hover:border-gray-600 cursor-pointer"
