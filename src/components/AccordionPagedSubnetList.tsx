@@ -17,10 +17,16 @@ export function AccordionPagedSubnetList({ cidr, subnetCount, ip, pageSize }: { 
     if (page > 0) setPage(page - 1);
   };
 
+  const hostCountText = (cidr: string) => {
+    if (cidr === '31') return '2 Point-to-Point hosts';
+    if (cidr === '32') return '1 host';
+    return `${Math.pow(2, 32 - Number(cidr)) - 2} hosts`;
+  };
+
   return (
     <div>
       <h4 className="font-semibold mb-2 cursor-pointer" onClick={() => setIsOpen(!isOpen)}>
-        CIDR /{cidr} ({subnetCount} subnets / {Math.pow(2, 32 - Number(cidr)) - 2} hosts) {isOpen ? '▲' : '▼'}
+        CIDR /{cidr} ({subnetCount} subnets / {hostCountText(cidr)}) {isOpen ? '▲' : '▼'}
       </h4>
       {isOpen && (
         <div>
