@@ -7,30 +7,6 @@ interface SubnetSliderProps {
 }
 
 export function SubnetSlider({ ip, onChange }: SubnetSliderProps) {
-  const [isShiftPressed, setIsShiftPressed] = useState(false);
-
-  useEffect(() => {
-    const handleKeyDown = (event: KeyboardEvent) => {
-      if (event.key === 'Shift') {
-        setIsShiftPressed(true);
-      }
-    };
-
-    const handleKeyUp = (event: KeyboardEvent) => {
-      if (event.key === 'Shift') {
-        setIsShiftPressed(false);
-      }
-    };
-
-    window.addEventListener('keydown', handleKeyDown);
-    window.addEventListener('keyup', handleKeyUp);
-
-    return () => {
-      window.removeEventListener('keydown', handleKeyDown);
-      window.removeEventListener('keyup', handleKeyUp);
-    };
-  }, []);
-
   const handleSliderChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     let value = Number(event.target.value);
     if (value > 8) value--;
@@ -42,7 +18,7 @@ export function SubnetSlider({ ip, onChange }: SubnetSliderProps) {
   };
 
   return (
-    <div className="relative w-fit" style={{ pointerEvents: isShiftPressed ? 'auto' : 'none' }}>
+    <div className="relative w-fit">
       <input
         type="range"
         min="0"
