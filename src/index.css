@@ -47,5 +47,5 @@ body {
 }
 
 .net-slider {
-  @apply absolute -left-[1ch] w-[36ch] top-2 h-4 opacity-0 cursor-ew-resize;
+  @apply absolute -left-[1ch] w-[36ch] h-4 opacity-0 cursor-ew-resize;
 }
